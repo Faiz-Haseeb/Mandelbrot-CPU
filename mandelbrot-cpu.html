@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UT-8" >
+<title>GPU Scaling</title>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+#version 300 es
+
+in vec4 vPosition;  // attribute
+in vec3 vColor;
+out vec3 aColor; 
+
+void main()
+{
+gl_Position = vec4(vPosition.xyz, 1.0);
+gl_PointSize = 10.0;
+aColor = vColor;
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+#version 300 es
+precision highp float;  // lowp, mediump
+in vec3 aColor;
+out vec4 fragColor;
+
+void main()
+{
+    fragColor = vec4(aColor, 1.0);
+    
+}
+</script>
+
+<script src="http://interactivecomputergraphics.com/8E/Code%20update/Common/initShadersES6.js"></script>
+<script src="http://interactivecomputergraphics.com/8E/Code%20update/Common/MVES6.js"></script>
+<script type="text/javascript" src="mandelbrot-cpu.js"></script>
+<script type="text/javascript" src="map.js"></script>
+
+</head>
+
+<body>
+
+<h1>Mandelbrot set on CPU</h1>
+<br>
+
+<canvas id="gl-canvas" width="512" height="512" style="border:1px solid #000000;">
+Oops ... your browser doesn't support the HTML5 canvas element
+</canvas>
+<br>
+
+<input type="range" min="0" max="50" value="10" class="slider" step="1" id="myRange">    
+
+</body>
+</html>
